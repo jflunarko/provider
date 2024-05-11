@@ -1,0 +1,43 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    provider: [Provider!] @goField(forceResolver: true)
+    packet: [Packet!] @goField(forceResolver: true)
+}
+
+input NewUser {
+    name: String!
+    email: String!
+    password: String!
+}
+
+input UpdateUser {
+    email: String
+    NewPassword: String!
+}
+
+input UserLogin {
+    email: String!
+    password: String!
+}
+type UserQuery {
+    users: [User!]! @goField(forceResolver: true) @isLogin
+    user(id: Int!): User! @goField(forceResolver: true)
+}
+
+type UserToken {
+    message: String!
+    token: String!
+}
+type UserMutations {
+    register(input: NewUser!): UserToken! @goField(forceResolver:true)
+    delete(id: ID!): String! @goField(forceResolver: true)
+    update(input: UpdateUser!): String! @goField(forceResolver:true)
+    login(login: UserLogin!): UserToken! @goField(forceResolver: true)
+    buy(packetId: ID!): String! @goField(forceResolver:true) @isLogin
+    cancelPacket(packetId: ID!): String! @goField(forceResolver:true) @isLogin
+    choose(providerId: ID!): String! @goField(forceResolver:true )@isLogin
+    cancelProvider(providerId: ID!): String! @goField(forceResolver:true)@isLogin
+}

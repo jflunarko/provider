@@ -1,0 +1,12 @@
+type Query {
+  users: UserQuery! @goField(forceResolver: true)
+  providers: ProviderQuery! @goField(forceResolver: true)
+  packet: PacketQuery! @goField(forceResolver:true)
+}
+
+
+type Mutation {
+  users: UserMutations! @goField(forceResolver: true)
+  providers: ProviderMutations! @goField(forceResolver: true)
+  packet: PacketMutations! @goField(forceResolver: true)
+}

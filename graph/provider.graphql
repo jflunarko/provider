@@ -1,0 +1,25 @@
+type Provider {
+    id: ID!
+    provider: String!
+    location: String!
+    packet: [Packet!] @goField(forceResolver:true)
+}
+
+input NewProvider {
+    provider: String!
+    location: String!
+}
+input UpdateProvider {
+	provider: String! 
+	location: String!
+}
+type ProviderQuery {
+    providers: [Provider!]! @goField(forceResolver: true)
+    provider(id: ID!): Provider! @goField(forceResolver: true)
+}
+
+type ProviderMutations {
+    create(input: NewProvider!): Provider! @goField(forceResolver: true)
+    delete(id: Int!): String! @goField(forceResolver :true)
+    update(id: ID!, input: UpdateProvider!): Provider! @goField(forceResolver:true)
+}

@@ -1,0 +1,27 @@
+type Packet {
+    id: ID!
+    provider_id: ID!
+    name: String!
+    datalimit: String!
+    validity: String!
+    price: Int!
+}
+
+input NewPacket {
+    provider_id: ID!
+    name: String!
+    datalimit: String!
+    validity: String!
+    price: Int!
+}
+
+type PacketQuery {
+    packets: [Packet!]! @goField(forceResolver: true)
+    packet(id: Int!): Packet! @goField(forceResolver: true)
+}
+
+type PacketMutations {
+    create(input: NewPacket!): Packet! @goField(forceResolver: true)
+    delete(id: Int!): String! @goField(forceResolver :true)
+    update(id: ID!, input: NewPacket!): Packet! @goField(forceResolver:true)
+}
